@@ -1,67 +1,169 @@
 //
-// Homework 06.01
+// Homework 06.09
 // 1
-
-const button = document.createElement("button");
-button.innerText = "Button";
-button.classList.add("myBtn");
-document.body.append(button);
-
-const modal = document.querySelector(".modal");
-
-const modalText = document.createElement("div");
-modalText.innerText = "This is my Modal";
-modalText.classList.add("modalText");
-modal.append(modalText);
-
-button.addEventListener("click", () => {
-  modal.style.display = "block";
-});
-
+function recurseFunction(number, power, cb) {
+  if (power === 0) return number;
+  return recurseFunction(cb(number), power - 1, cb);
+}
+const c = recurseFunction(2, 1, (number) => number * number);
+console.log(c);
 // 1
+//
 
+//
 // 2
-
-const input = document.querySelector(".input");
-const inputBtn = document.querySelector(".inputBtn");
-const color = input.value;
-
-inputBtn.addEventListener("click", () => {
-  if (color === "red") {
-    document.body.style.backgroundColor = color;
-  } else if (color === "blue") {
-    document.body.style.backgroundColor = color;
-  } else if (color === "black") {
-    document.body.style.backgroundColor = color;
-  } else if (color === "white") {
-    document.body.style.backgroundColor = color;
-  } else if (color === "green") {
-    document.body.style.backgroundColor = color;
-  } else {
-    alert("wrong color");
-  }
-});
-
+const fetchDiv = document.querySelector(".fetchDiv");
+fetch(`https://jsonplaceholder.typicode.com/posts`)
+  .then((res) => res.json())
+  .then((result) => {
+    result.forEach((element) => {
+      const p = document.createElement("p");
+      p.innerHTML = `id: ${element.id}`;
+      fetchDiv.appendChild(p);
+    });
+  });
 // 2
-
+//
 // 3
-
-const inputNumber = document.querySelector(".inputNumber");
-const inputNumberBtn = document.querySelector(".inputNumberBtn");
-const arrInputNumber = Array.from(inputNumber);
-console.log(inputNumber.value.length, arrInputNumber.length);
-
-inputNumberBtn.addEventListener("click", (s) => {
-  s.preventDefault();
-
-  let sum = 0;
-  let average = 0;
-  for (let i = 0; i < inputNumber.value.length; i++) {
-    sum += inputNumber.value;
-    average = sum / inputNumber.value.length;
+const originalObj = {
+  name: "Zura",
+  age: 24,
+  address: {
+    city: "Tbilisi",
+  },
+};
+async function deepCopy() {
+  try {
+    if (typeof originalObj !== "object") {
+      throw Error("Error");
+    }
+    const copy = await JSON.parse(JSON.stringify(originalObj));
+    console.log(copy);
+  } catch (error) {
+    alert("Error 404");
   }
-  console.log(average);
-});
+}
+console.log(deepCopy());
+// 3
+//
+// Homework 06.09
+//
+
+// Homework 06.07
+
+// function toyShop(sellTime, makeTime, deliverToys) {
+//   return new Promise((resolve, reject) => {
+//     if (sellTime < 2 && makeTime < 3 && deliverToys < 4) {
+//       resolve("Sold well");
+//     }
+//     if (sellTime > 2 || makeTime > 2 || deliverToys > 3) {
+//       reject("Failed selling Toys");
+//     }
+//   });
+// }
+// toyShop(1, 1, 2)
+//   .then((res) => console.log(res))
+//   .catch((rej) => console.log(rej));
+
+// //
+
+// function makeToys() {
+//   return new Promise((resolve, reject) => {
+//     if (Math.random() < 100) resolve("Made Toys");
+//     else reject("Failed to make Toys");
+//   });
+// }
+
+// function sellToys(status) {
+//   return new Promise((resolve, reject) => {
+//     if (status === "Made Toys")
+//       if (Math.random() < 0.8) resolve("Sold Toys");
+//       else reject("Failed to sell Toys quickly enough");
+//   });
+// }
+
+// function deliverToys(status) {
+//   return new Promise((resolve, reject) => {
+//     if (status === "Sold Toys")
+//       if (Math.random() < 0.6) resolve("Delivered Toys to customers");
+//       else reject("Failed to deliver Toys");
+//   });
+// }
+
+// makeToys()
+//   .then((status) => sellToys(status))
+//   .then((status) => deliverToys(status))
+//   .then((res) => console.log(res))
+//   .catch((rej) => console.log(rej));
+
+//
+// Homework 06.07
+//
+
+// //
+// // Homework 06.01
+// // 1
+
+// const button = document.createElement("button");
+// button.innerText = "Button";
+// button.classList.add("myBtn");
+// document.body.append(button);
+
+// const modal = document.querySelector(".modal");
+
+// const modalText = document.createElement("div");
+// modalText.innerText = "This is my Modal";
+// modalText.classList.add("modalText");
+// modal.append(modalText);
+
+// button.addEventListener("click", () => {
+//   modal.style.display = "block";
+// });
+
+// // 1
+
+// // 2
+
+// const input = document.querySelector(".input");
+// const inputBtn = document.querySelector(".inputBtn");
+// const color = input.value;
+
+// inputBtn.addEventListener("click", () => {
+//   if (color === "red") {
+//     document.body.style.backgroundColor = color;
+//   } else if (color === "blue") {
+//     document.body.style.backgroundColor = color;
+//   } else if (color === "black") {
+//     document.body.style.backgroundColor = color;
+//   } else if (color === "white") {
+//     document.body.style.backgroundColor = color;
+//   } else if (color === "green") {
+//     document.body.style.backgroundColor = color;
+//   } else {
+//     alert("wrong color");
+//   }
+// });
+
+// // 2
+
+// // 3
+
+// const inputNumber = document.querySelector(".inputNumber");
+// const inputNumberBtn = document.querySelector(".inputNumberBtn");
+// const arrInputNumber = Array.from(inputNumber);
+// console.log(inputNumber.value.length, arrInputNumber.length);
+
+// inputNumberBtn.addEventListener("click", (s) => {
+//   s.preventDefault();
+
+//   let sum = 0;
+//   let average = 0;
+//   for (let i = 0; i < inputNumber.value.length; i++) {
+//     sum += inputNumber.value;
+//     average = sum / inputNumber.value.length;
+//   }
+//   console.log(average);
+// });
 
 // 3
 // Homework 06.01
